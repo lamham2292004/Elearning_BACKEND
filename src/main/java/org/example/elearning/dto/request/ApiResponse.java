@@ -15,5 +15,19 @@ public class ApiResponse <T> {
     String message;
     T result;
 
+    public static <T> ApiResponse<T> success(T result, String message) {
+        return ApiResponse.<T>builder()
+                .code(200) // Mã thành công
+                .message(message)
+                .result(result)
+                .build();
+    }
 
+    // Phương thức tiện lợi để tạo phản hồi lỗi
+    public static <T> ApiResponse<T> error(int code, String message) {
+        return ApiResponse.<T>builder()
+                .code(code)
+                .message(message)
+                .build();
+    }
 }

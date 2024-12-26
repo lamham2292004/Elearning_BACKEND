@@ -3,6 +3,7 @@ package org.example.elearning.controller;
 import com.nimbusds.jose.JOSEException;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import lombok.extern.slf4j.Slf4j;
 import org.example.elearning.dto.request.ApiResponse;
 import org.example.elearning.dto.request.AuthenticationRequest;
 import org.example.elearning.dto.request.IntrospectRequest;
@@ -20,6 +21,7 @@ import java.text.ParseException;
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE , makeFinal = true)
+@Slf4j
 public class AuthenticationController {
     AuthenticationService authenticationService;
 
@@ -33,6 +35,7 @@ public class AuthenticationController {
 
     @PostMapping("/introspect")
     ApiResponse<IntrospectResponse> authenticate(@RequestBody IntrospectRequest request) throws ParseException, JOSEException {
+        log.info("Received introspect request with token: {}", request.getToken());
         var result = authenticationService.introspect(request);
         return ApiResponse.<IntrospectResponse>builder()
                 .result(result)

@@ -13,16 +13,13 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserCreationRequest {
-    @Size(min = 3,message = "USERNAME_INVALID")
+    @Size(min = 3, message = "USERNAME_INVALID")
     String username;
     @NotEmpty
-    private String email;
-
+    String email;
     @Size(min = 8, message = "PASSWORD_INVALID")
     String password;
     String address;
     String phone;
     LocalDate dob;
-
-
 }
